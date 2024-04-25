@@ -1,56 +1,56 @@
 class Observer {
-	#callback;
-	#subject;
+  #callback;
+  #subject;
 
-	constructor(callback, subject) {
-		this.#callback = callback;
-		this.#subject = subject;
-	}
+  constructor(callback, subject) {
+    this.#callback = callback;
+    this.#subject = subject;
+  }
 
-	next() {
-		this.#callback(this.#subject.getState());
-	}
+  next() {
+    this.#callback(this.#subject.getState());
+  }
 
-	unsubscribe() {
-		this.#subject.unsubscribe(this);
-	}
+  unsubscribe() {
+    this.#subject.unsubscribe(this);
+  }
 }
 
 class Subject {
-	#observers = [];
-	#state;
+  #observers = [];
+  #state;
 
-	getState() {
-		return this.#state;
-	}
+  getState() {
+    return this.#state;
+  }
 
-	next(state) {
-		this.#state = state;
-		this.#observers.forEach((observer) => observer.next())
-	}
+  next(state) {
+    this.#state = state;
+    this.#observers.forEach((observer) => observer.next());
+  }
 
-	subscribe(callback) {
-		const observer = new Observer(callback, this);
-		this.#observers.push(observer);
+  subscribe(callback) {
+    const observer = new Observer(callback, this);
+    this.#observers.push(observer);
 
-		return observer;
-	}
+    return observer;
+  }
 
-	unsubscribe(observer) {
-		const observerIndex = this.#observers.indexOf(observer);
+  unsubscribe(observer) {
+    const observerIndex = this.#observers.indexOf(observer);
 
-		this.#observers.splice(observerIndex, 1);
-	}
+    this.#observers.splice(observerIndex, 1);
+  }
 }
 
 const users$ = new Subject();
 
 users$.subscribe((values) => {
-	console.log('Component A: ', values);
-})
+  console.log("Component A: ", values);
+});
 
 users$.subscribe((values) => {
-	console.log('Component B: ', values);
-})
+  console.log("Component B: ", values);
+});
 
-users$.next({ name: 'Andreea' });
+users$.next({ name: "Andreea" });

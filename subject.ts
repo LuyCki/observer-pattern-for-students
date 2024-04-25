@@ -17,7 +17,7 @@ export class Subject<T> implements ISubject<T> {
 
   public next(state: T): void {
     this.state = state;
-    this.observers.forEach((observer: IObserver<T>) => observer.next())
+    this.observers.forEach((observer: IObserver<T>) => observer.next());
   }
 
   public subscribe(callback: any): IObserver<T> {

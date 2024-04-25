@@ -7,7 +7,7 @@ export interface IObserver<T> {
 
 export class Observer<T> implements IObserver<T> {
   private callback: any;
-  private subject: ISubject<T>
+  private subject: ISubject<T>;
 
   constructor(callback: any, subject: ISubject<T>) {
     this.callback = callback;
